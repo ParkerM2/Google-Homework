@@ -55,6 +55,7 @@ class Home extends Component {
             <div>
             <h1> Google Books Search </h1>
             <h2> Search for and Save Books</h2>
+            
             <Form
                 handleInputChange={this.handleInputChange}
                 handleFormSubmit={this.handleFormSubmit}
@@ -88,3 +89,5 @@ class Home extends Component {
         )
     }
 }
+
+export default Home;

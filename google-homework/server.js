@@ -9,20 +9,25 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// static 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-}
+// // static 
+// if (process.env.NODE_ENV === "production") {
+//     app.use(express.static("client/build"));
+// }
 
 // api / view routes
 app.use(routes);
 
+
+// mongodb+srv://Parker:<password>@cluster0.b3ah4.mongodb.net/<dbname>?retryWrites=true&w=majority
+
 // Connect to the MongoDB
-mongoose.connect(
-    process.env.MONGODB_URI || "mongo cluster url" {
-    useCreateIndex: true,
-    useNewUrlParser: true,
-}
-);
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://Parker:manningsigns1@cluster0.b3ah4.mongodb.net/Book?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
 
 app.listen(PORT, () => console.log(`Started on ${PORT}`));
