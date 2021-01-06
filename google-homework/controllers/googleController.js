@@ -1,32 +1,35 @@
+const axios = require('axios');
 const db = require("../models");
 
-// routes for the books 
+// methods for google api
+
+// findAll searches google books api and returns the entries we haven't saved
+// and makes sure the returned books contain title author link description and image
 
 module.exports = {
     findAll: function (req, res) {
-        db.Book.find(req.query)
-            .then(dbBook => res.json(dbBook))
-            .catch(err => console.log(err));
-    },
-    findById: function (req, res) {
-        db.Book.find(req.params.id)
-            .then(dbBook => res.json(dbBook))
-            .catch(err => console.log(err));
-    },
-    create: function (req, res) {
-        db.Book.create(req.body)
-            .then(dbBook => res.json(dbBook))
+        const { query: params } = req;
+        axios.get("https://www.googleapis.com/books/v1/volumes", {
+            params
+        }).then(
+            results => 
+                results.data.items.filter(
+                    results =>
+                        results.volumeInfo.title &&
+                        results.volumeInfo.infoLink &&
+                        results.volumeInfo.authors &&
+                        results.volumeInfo.description &&
+                        results.volumeInfo.imageLinks &&
+                        results.volumeInfo.imageLinks.thumbnail
+                )
+        ).then(
+            apiBooks => db.Book.find().then(dbBooks =>
+                apiBooks.filter(apiBook => 
+                    dbBooks.every(dbBook => dbBook.googleId.toString() !== apiBook.googleId)
+                )
+            )
+        )
+            .then(books => res.json(books))
             .catch(err => console.log(err))
-    },
-    update: function (req, res) {
-        db.Book.findOneAndUpdate({id: req.params.id} , req.body)
-            .then(dbBook => res.json(dbBook))
-            .catch(err => console.log(err))
-    },
-    remove: function (req, res) {
-        db.Book.findById(req.params.id)
-            .then(dbBook => dbBook.remove())
-            .then(dbBook => res.json(dbBook))
-            .catch(err => console.log(err))
-    },
+    }
 }
