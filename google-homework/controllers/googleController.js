@@ -30,6 +30,7 @@ module.exports = {
             )
         )
             .then(books => res.json(books))
+            .then(books => console.log(books))
             .catch(err => console.log(err))
     }
 }
