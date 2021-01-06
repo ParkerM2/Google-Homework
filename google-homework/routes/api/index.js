@@ -5,7 +5,7 @@ const gRoutes = require("./google");
 
 router.use("/books", bRoutes);
 router.use("/google", gRoutes);
-// for other routes rendering html
+// for other routes, render html
 router.use(function (req, res) {
     res.sendFile(path.join(__dirname, "../../client/build/index.html"))
 });
