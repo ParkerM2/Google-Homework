@@ -20,11 +20,12 @@ class Home extends Component {
       });
   };
    getBooks = () => {
-    API.getBooks("lol")
+    API.getBooks(this.state.q)
       .then(res =>
         this.setState({
           books: res.data.description
-        })
+        }),
+        console.log(res)
       )
       .catch(() =>
         this.setState({
