@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import API from "../utils/API";
 import {List} from "../components/List";
 import Form from "../components/Form";
+import Book from "../components/Book";
 
 class Home extends Component {
     state = {
@@ -12,6 +13,7 @@ class Home extends Component {
   
     handleInputChange = event => {
       const { name, value } = event.target;
+      console.log(this.state)
       this.setState({
         [name]: value
       });
@@ -23,7 +25,7 @@ class Home extends Component {
           this.setState({
             books: res.data
           })
-        )
+        ).then(res => console.log(res))
         .catch(() =>
           this.setState({
             books: [],
@@ -34,6 +36,7 @@ class Home extends Component {
   
     handleFormSubmit = event => {
       event.preventDefault();
+      console.log(event)
       this.getBooks();
     };
   

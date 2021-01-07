@@ -21,3 +21,4 @@ function Book({ title, subtitle, authors, link, description, image, Button }) {
         </div>
     )
 }
+export default Book;
