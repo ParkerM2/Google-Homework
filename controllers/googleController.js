@@ -8,13 +8,12 @@ const db = require("../models");
 
 module.exports = {
     findAll: function (req, res) {
-        console.log("inside of api call", params)
+        console.log("inside of api call", req)
         const { query: params } = req;
         axios.get("https://www.googleapis.com/books/v1/volumes?q=", {
             params
         }).then(
-            results => 
-                console.log(results),
+            results =>
                 results.data.items.filter(
                     results =>
                         results.volumeInfo.title &&
