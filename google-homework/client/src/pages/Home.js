@@ -3,6 +3,7 @@ import API from "../utils/API";
 import {List} from "../components/List";
 import Form from "../components/Form";
 import Book from "../components/Book";
+import axios from "axios";
 
 class Home extends Component {
     state = {
@@ -17,27 +18,53 @@ class Home extends Component {
       this.setState({
         [name]: value
       });
-    };
+  };
+   getBooks = () => {
+    API.getBooks(this.state.q)
+      .then(res =>
+        this.setState({
+          books: res.data
+        })
+      )
+      .catch(() =>
+        this.setState({
+          books: [],
+          message: "No New Books Found, Try a Different Query"
+        })
+      );
+  };
+
   
-    getBooks = () => {
-      API.getBooks(this.state.q)
-        .then(res =>
-          this.setState({
-            books: res.data
-          })
-        ).then(res => console.log(res))
-        .catch(() =>
-          this.setState({
-            books: [],
-            message: "No New Books Found, Try a Different Query"
-          })
-        );
-    };
+    // getBooks = (q) => {
+    //    axios.get("https://www.googleapis.com/books/v1/volumes?q=" + q)
+    //     .then(results =>
+    //     results.data.items.filter(
+    //       result =>
+    //         result.volumeInfo.title &&
+    //         result.volumeInfo.infoLink &&
+    //         result.volumeInfo.authors &&
+    //         result.volumeInfo.description &&
+    //         result.volumeInfo.imageLinks &&
+    //         result.volumeInfo.imageLinks.thumbnail
+    //     )
+    //   )
+    //   .then(apiBooks =>
+    //     this.setState({
+    //       books : apiBooks
+    //     })
+    //  )
+    //     .catch(() =>
+    //       this.setState({
+    //         books: [],
+    //         message: "No New Books Found, Try a Different Query"
+    //       })
+    //     )
+    // };
   
     handleFormSubmit = event => {
       event.preventDefault();
       console.log(event)
-      this.getBooks();
+      this.getBooks(this.state.q);
     };
   
     handleBookSave = id => {
@@ -52,6 +79,7 @@ class Home extends Component {
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks.thumbnail
       }).then(() => this.getBooks());
+      console.log(book.volumeInfo.description, "after API.saveBook")
     };
     render() {
         return(

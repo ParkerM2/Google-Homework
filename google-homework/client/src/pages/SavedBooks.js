@@ -10,14 +10,15 @@ class SavedBooks extends Component {
 
     componentDidMount() {
         this.getSavedBooks();
+        console.log(this.state.books, "inside of componentdidmount")
     }
 
     getSavedBooks = () => {
         API.getSavedBooks()
             .then(res =>
-                this.setState({ books: res.data })
-            )
+                console.log("response from API.getSavedBooks", res))
             .catch(err => console.log(err));
+        console.log(this.state.books, "after API call get savedbooks")
     };
 
     handleDeleteBook = id => {
