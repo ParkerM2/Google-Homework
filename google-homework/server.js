@@ -34,7 +34,7 @@ app.use(routes);
 //   // perform actions on the collection object
 //   client.close();
 // });
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Book");
+mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://Parker:manningsigns1@cluster0.b3ah4.mongodb.net/googlebooks?retryWrites=true&w=majority");
 
 
 

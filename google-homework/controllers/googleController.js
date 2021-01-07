@@ -24,15 +24,9 @@ module.exports = {
                         results.volumeInfo.imageLinks &&
                         results.volumeInfo.imageLinks.thumbnail
                 )
-        ).then(
-            apiBooks => db.Book.find().then(dbBooks =>
-                apiBooks.filter(apiBook => 
-                    dbBooks.every(dbBook => dbBook.googleId.toString() !== apiBook.googleId)
-                )
-            )
         )
-            .then(books => res.json(books))
-            .then(books => console.log(books))
-            .catch(err => console.log(err))
+        .then(books => res.json(books))
+        .then(books => console.log(books))
+        .catch(err => console.log(err))
     }
 }
