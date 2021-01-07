@@ -22,19 +22,19 @@ app.use(routes);
 // mongodb+srv://Parker:<password>@cluster0.b3ah4.mongodb.net/<dbname>?retryWrites=true&w=majority
 
 // // Connect to the Mongo DB
-// const MongoClient = require('mongodb').MongoClient;
-// const uri = "mongodb+srv://Parker:manningsigns1@cluster0.b3ah4.mongodb.net/fitness?retryWrites=true&w=majority";
-// const client = new MongoClient(uri, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useFindAndModify: false
-// });
-// client.connect(err => {
-//   const collection = client.db("test").collection("devices");
-//   // perform actions on the collection object
-//   client.close();
-// });
-mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://Parker:manningsigns1@cluster0.b3ah4.mongodb.net/googlebooks?retryWrites=true&w=majority");
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://Parker:manningsigns1@cluster0.b3ah4.mongodb.net/fitness?retryWrites=true&w=majority";
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+});
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+// mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://Parker:manningsigns1@cluster0.b3ah4.mongodb.net/googlebooks?retryWrites=true&w=majority");
 
 
 
