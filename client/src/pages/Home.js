@@ -23,9 +23,9 @@ class Home extends Component {
     API.getBooks(this.state.q)
       .then(res =>
         this.setState({
-          books: res.data.description
+          books: res.data
         }),
-        console.log(res)
+        console.log(this.state.books)
       )
       .catch(() =>
         this.setState({
