@@ -7,13 +7,13 @@
 
 > Search for Books on google and save them to a db.
 
-### ✨ [Demo](   https://googlebooksapp2.herokuapp.com/)
+### ✨ [Demo](https://googlebooksapp2.herokuapp.com/)
 
 ## Author
 
 👤 **Parker Manning       **
 
-* Github: [@ ParkerM2      ](https://github.com/ ParkerM2      )
+* Github: [@ ParkerM2](https://github.com/ ParkerM2      )
 
 ## Show your support
 
